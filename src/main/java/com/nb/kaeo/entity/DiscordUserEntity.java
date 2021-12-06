@@ -1,10 +1,9 @@
 package com.nb.kaeo.entity;
 
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -14,4 +13,7 @@ public class DiscordUserEntity {
     private String discordId;
     private String username;
     private String steamId;
+
+    @OneToMany(mappedBy = "discordUser", fetch = FetchType.LAZY)
+    private Set<WarningEntity> warnings;
 }

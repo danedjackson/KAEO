@@ -16,4 +16,7 @@ public class WarningEntity {
     private String notes;
     private LocalDateTime entryDate;
     private Boolean current;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DiscordUserEntity discordUser;
 }
