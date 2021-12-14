@@ -45,7 +45,7 @@ class DiscordUserServiceTest {
         String id = "1234567890";
 
         //when
-        discordUserRepository.findById(id);
+        discordUserService.getDiscordUser(id);
 
         //then
         verify(discordUserRepository).findById(id);
