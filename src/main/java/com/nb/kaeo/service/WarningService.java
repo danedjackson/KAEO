@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class WarningService {
@@ -48,5 +49,22 @@ public class WarningService {
         } catch (DataAccessException dataAccessException) {
             logger.error("Something went wrong in the database processes");
         }
+    }
+
+    public List<WarningEntity> getUserByName(String name) {
+        List<DiscordUserEntity> discordUsers = discordUserService.getAllDiscordUsers();
+
+        DiscordUserEntity discordUserEntity = discordUsers.stream()
+                .filter(user -> name.equalsIgnoreCase(user.getUsername()))
+                .findAny()
+                .orElse(null);
+
+        logger.info(discordUserEntity.toString());
+
+        if (discordUserEntity != null) {
+            return warningRepository.getWarningByDiscordUser(name);
+        }
+
+        return null;
     }
 }
