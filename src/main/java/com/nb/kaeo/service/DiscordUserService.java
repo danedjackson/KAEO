@@ -30,9 +30,15 @@ public class DiscordUserService {
         return discordUserRepository.findById(userId);
     }
 
-    public void addDiscordUser(DiscordUserEntity discordUserEntity) {
+    public boolean addDiscordUser(DiscordUserEntity discordUserEntity) {
         logger.info("Attempting to add discord user. . . ");
-        discordUserRepository.save(discordUserEntity);
+        try {
+            discordUserRepository.save(discordUserEntity);
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public List<DiscordUserEntity> getDiscordUserByName(String name) {
