@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface WarningRepository extends JpaRepository<WarningEntity, Long> {
-    List<WarningEntity> getWarningByDiscordUser(String user);
+    List<WarningEntity> findByDiscordUserId(String id);
 }

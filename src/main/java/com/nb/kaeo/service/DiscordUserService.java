@@ -35,4 +35,8 @@ public class DiscordUserService {
         discordUserRepository.save(discordUserEntity);
     }
 
+    public List<DiscordUserEntity> getDiscordUserByName(String name) {
+        logger.info("Attempting to get information for user {}. . . ", name);
+        return discordUserRepository.findByUsername(name);
+    }
 }

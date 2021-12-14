@@ -52,17 +52,18 @@ public class WarningService {
     }
 
     public List<WarningEntity> getUserByName(String name) {
-        List<DiscordUserEntity> discordUsers = discordUserService.getAllDiscordUsers();
+//        List<DiscordUserEntity> discordUsers = discordUserService.getAllDiscordUsers();
 
-        DiscordUserEntity discordUserEntity = discordUsers.stream()
-                .filter(user -> name.equalsIgnoreCase(user.getUsername()))
-                .findAny()
-                .orElse(null);
+//        DiscordUserEntity discordUserEntity = discordUsers.stream()
+//                .filter(user -> name.equalsIgnoreCase(user.getUsername()))
+//                .findAny()
+//                .orElse(null);
 
+        DiscordUserEntity discordUserEntity = discordUserService.getDiscordUserByName(name).get(0);
         logger.info(discordUserEntity.toString());
 
         if (discordUserEntity != null) {
-            return warningRepository.getWarningByDiscordUser(name);
+            return warningRepository.findByDiscordUserId(discordUserEntity.getDiscordId());
         }
 
         return null;
